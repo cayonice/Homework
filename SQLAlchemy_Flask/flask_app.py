@@ -21,14 +21,14 @@ Base = automap_base()
 Base.prepare(engine, reflect=True)
 
 # Save references to the table
-Measurement = Base.classes.measurements
-Station = Base.classes.stations
+Measurement = Base.classes.measurement
+Station = Base.classes.station
 
 # Create our session
 session = Session(engine)
-
+#########################################################
 # Flask Setup
-
+########################################################
 app = Flask(__name__)
 
 
@@ -130,7 +130,6 @@ def two_temps(start, end):
     temps_list = list(np.ravel(results))
 
     return jsonify(temps_list)
-
 
 
 if __name__ == '__main__':
