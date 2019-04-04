@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Wind Speed</title>
+    <title>Weather Analysis</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="style.css">
@@ -14,7 +14,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <div class="navbar-header">
-                <a class="navbar-brand" href="index.html" style="color:white;background-color:mediumblue;font-size:30px"><b>Latitude</b></a>
+            <a class="navbar-brand" href="index.html" style="color:white;background-color:mediumblue;font-size:30px"><b>Latitude</b></a>
         </div>
         <ul class="nav navbar-nav navbar-right">
             <li class="dropdown">
@@ -22,7 +22,7 @@
                     href="#">Plots
                     <span class="caret"></span></a>
                 <ul class="dropdown-menu">
-                    <li><a href="maximum_temp.html">Max Temperature</a></li>
+                    <li><a href="maximum_temp.html">Maximum Temperature</a></li>
                     <li><a href="humidity.html">Humidity</a></li>
                     <li><a href="cloudiness.html">Cloudiness</a></li>
                     <li><a href="wind_speed.html">Wind Speed</a></li>
@@ -38,12 +38,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-sm-12">
-                <h1>Wind Speed</h1>
-                <img src="Resources/assets/images/Fig4.png">
-                <p> The data showed that most of the randomly generated cities had wind speeds less than 15-20 mph. 
-                    Factors to consider that contribute to wind speed include, hurricanes and monsoons. 
-                    Hurricane season was over and so was the Northern monsoon season. 
-                    However, the Southern monsoon season, which is October through April, is currently in progress. </p>
+                <h1>Summary:</h1>
+                <div class="row">
+                    <div class="col-md-4 col-sm-4">
+                    </div>
+                    <div class="col-md-8 col-sm-8">
+                        <p>The purpose of this project was to analyze how weather changes as you get closer to the
+                            equator. To accomplish this analysis, we first pulled data from the OpenWeatherMap API to
+                            assemble a dataset on over 500 cities.
+                            After assembling the dataset, we used Matplotlib to plot various aspects of the weather vs.
+                            latitude. Factors we looked at included: temperature, cloudiness, wind speed, and
+                            humidity. This site provides the source data and visualizations created as part of the
+                            analysis, as well as explanations and descriptions of any trends and correlations
+                            witnessed.</p>
+                    </div>
+                </div>
             </div>
             <div class="col-md-4 col-sm-12">
                 <h1>Collection of Visuals</h1>
@@ -70,7 +79,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 </body>
