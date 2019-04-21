@@ -1,39 +1,37 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, redirect
+from flask_pymongo import PyMongo
 from scrape_mars import scrape
-import pymongo
 
+# Create an instance of Flask
 app = Flask(__name__)
 
-conn = 'mongodb://localhost:27017'
+# Use PyMongo to establish Mongo connection
+mongo = PyMongo(app, uri="mongodb://localhost:27017/mars_app")
 
-client = pymongo.MongoClient(conn)
+# Route to render index.html template using data from Mongo
+@app.route("/")
+def home():
 
-db = client.mars_db
+    # Find one record of data from the mongo database
+    destination_data = mongo.db.collection.find_one()
 
+    # Return template and data
+    return render_template("index.html", mars_data=destination_data)
+
+
+# Route that will trigger the scrape function
 @app.route("/scrape")
-def mars_scrape():
+def scrapepage():
+
+    # Run the scrape function
     mars_data = scrape()
-    #json_mars_data = jsonify(mars_data)
-    db.mars.drop()
-    db.mars.insert(mars_data)
-    del mars_data['_id']
-    return render_template('index.html', **mars_data)
 
-@app.route('/mars_facts')
-def mars_facts():
-    return render_template('mars_facts_table.html')
+    # Update the Mongo database using update and upsert=True
+    mongo.db.collection.update({}, mars_data, upsert=True)
 
-@app.route("/hemispheres")
-def hemispheres():
-    mars_data = db.mars.find()[0]
-    del mars_data['_id']
-    return render_template('hemispheres.html', **mars_data)
+    # Redirect back to home page
+    return redirect("/")
 
-@app.route('/')
-def index():
-    mars_data = db.mars.find()[0]
-    del mars_data['_id']
-    return render_template('index.html', **mars_data)
 
 if __name__ == "__main__":
     app.run(debug=True)
